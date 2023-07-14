@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My To Do List</title>
+        <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>        
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+       <div id="formID"></div>
+
+       <script type="text/babel">
+            function Form(){
+                const {useState} = React;
+                // Variables declaration
+                const [lists, setList] = useState([]);
+                const [inputTask, setTask] = useState("");
+
+                // Adding form data into the task list array
+                const addTask = (todo) => {
+                    const taskArray = {
+                        id: Math.random(),
+                        todo: todo,
+                        completed: false
+                    }; 
+
+                    setList([...lists, taskArray]); // Appending new tasks to the list
+                    setTask("");
+                }
+
+                // Changing status of the completed tasks
+                const completeTask = (i) => {
+                    lists[i].completed = true;
+                    let el = lists.map((item) => {
+                        if(item.id === i){
+                            item.completed=true
+                        }
+                        return item
+                    });
+    
+                    setList(el);                    
+                }
+                
+                // Delete a task
+                const deleteTask = (i) => {
+                    const newList = lists.filter((todo) => todo.id !== i);
+                    setList(newList);
+                }
+
+                return (
+                    <div>
+                        <input
+                            type="text"
+                            value={inputTask}
+                            placeholder="Enter task.."
+                            onChange={(e) => setTask(e.target.value)}
+                        />
+                        <button onClick={() => addTask(inputTask)}>Add</button>
+                        <table>
+                                
+                            {lists.map((todo, index) => (
+                                    <tr>
+                                        <td className={(todo.completed)?'finished':''}>{todo.todo}</td>
+                                        {
+                                            (todo.completed)?<td>Completed</td>:<td>In progress</td>
+                                        }
+                                        <button onClick={() => completeTask(index)}>Complete</button>
+                                        <button onClick = {() => deleteTask(todo.id)}>Delete</button>
+                                    </tr>
+                            ))}
+                        </table>
+                    </div>
+
+                )
+
+            }
+            ReactDOM.render(<Form />, document.getElementById('formID'))
+            
+       </script>
+    </body>
+</html>
