@@ -1,4 +1,53 @@
 
+body{
+    padding-top: 40px;
+}
+#todoWrapper{
+    margin-top: 40px;
+    padding: 30px;
+    box-shadow: -4px 2px 12px 4px #ccc;
+    width: 80%;
+    margin: auto;
+}
 .finished{
     text-decoration: line-through;
+}
+.form-hold{
+    display: flex;
+    margin-bottom: 30px;
+}
+.form-hold input{
+    padding: 10px 15px;
+    appearance: none;
+    border: 2px solid #F3F3F3;
+    background-color: #F3F3F3;
+    font-size: 14px;
+    outline: none;
+    display: inline-block;
+    flex: 1 1 100%;
+}
+.form-hold button{
+    border: 1px solid #1572c7;
+    outline: none;
+    background: none;
+    background-color: #1572c7;
+    color: #FFF;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+tr td{
+    padding: 10px;
+}
+button {
+    border: 1px solid #1572c7;
+    outline: none;
+    background: none;
+    background-color: #1572c7;
+    color: #FFF;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
 }

@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-       <div id="formID"></div>
+       <div id="todoWrapper"></div>
 
        <script type="text/babel">
             function Form(){
@@ -52,23 +52,27 @@
 
                 return (
                     <div>
-                        <input
+                        <h4>My To Do List</h4>
+                        <div className="form-hold">                            
+                            <input
                             type="text"
                             value={inputTask}
                             placeholder="Enter task.."
                             onChange={(e) => setTask(e.target.value)}
-                        />
-                        <button onClick={() => addTask(inputTask)}>Add</button>
+                            />
+                            <button onClick={() => addTask(inputTask)}>Add</button>
+                        </div>
                         <table>
                                 
                             {lists.map((todo, index) => (
                                     <tr>
+                                        <td>{index+1}</td>
                                         <td className={(todo.completed)?'finished':''}>{todo.todo}</td>
                                         {
                                             (todo.completed)?<td>Completed</td>:<td>In progress</td>
                                         }
-                                        <button onClick={() => completeTask(index)}>Complete</button>
-                                        <button onClick = {() => deleteTask(todo.id)}>Delete</button>
+                                        <td><button onClick={() => completeTask(index)}>Complete</button></td>
+                                        <td><button onClick = {() => deleteTask(todo.id)}>Delete</button></td>
                                     </tr>
                             ))}
                         </table>
@@ -77,7 +81,7 @@
                 )
 
             }
-            ReactDOM.render(<Form />, document.getElementById('formID'))
+            ReactDOM.render(<Form />, document.getElementById('todoWrapper'))
             
        </script>
     </body>
