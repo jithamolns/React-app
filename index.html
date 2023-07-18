@@ -13,12 +13,26 @@
        <div id="todoWrapper"></div>
 
        <script type="text/babel">
-            function Form(){
+
+            function Form(){        
+
                 const {useState} = React;
                 // Variables declaration
                 const [lists, setList] = useState([]);
                 const [inputTask, setTask] = useState("");
-
+                console.log(lists);
+                
+                const displayTasks = (lists) =>{
+                    if (localStorage.getItem("tasks") == null) return;
+                    lists = JSON.parse(localStorage.getItem("tasks"));
+                    setList(lists);                    
+                }
+                
+                window.addEventListener('load', () => {
+                    displayTasks(lists);
+                })
+               
+                
                 // Adding form data into the task list array
                 const addTask = (todo) => {
                     const taskArray = {
@@ -28,6 +42,12 @@
                     }; 
 
                     setList([...lists, taskArray]); // Appending new tasks to the list
+                    localStorage.setItem("tasks", JSON.stringify([...JSON.parse(localStorage.getItem("tasks") || "[]"), 
+                        {   id: Math.random(),
+                            todo: todo,
+                            completed: false
+                        }
+                    ]));
                     setTask("");
                 }
 
@@ -51,7 +71,7 @@
                 }
 
                 return (
-                    <div>
+                    <div onload={()=>displayTasks()}>
                         <h4>My To Do List</h4>
                         <div className="form-hold">                            
                             <input
@@ -63,7 +83,6 @@
                             <button onClick={() => addTask(inputTask)}>Add</button>
                         </div>
                         <table>
-                                
                             {lists.map((todo, index) => (
                                     <tr>
                                         <td>{index+1}</td>
