@@ -89,13 +89,13 @@
                         </div>
                         <table>
                             {lists.map((todo, index) => (
-                                    <tr>
+                                    <tr onClick={() => completeTask(todo.todo)}>
                                         <td>{index+1}</td>
                                         <td className={(todo.completed)?'finished':''}>{todo.todo}</td>
                                         {
                                             (todo.completed)?<td>Completed</td>:<td>In progress</td>
                                         }
-                                        <td><button onClick={() => completeTask(todo.todo)}>Complete</button></td>
+                                        <td></td>
                                         <td><button onClick = {() => deleteTask(todo.id)}>Delete</button></td>
                                     </tr>
                             ))}

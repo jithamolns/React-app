@@ -12,6 +12,12 @@ body{
 table{
     width: 100%;
 }
+tr:hover td{
+    color: #1572c7;
+}
+td{
+    cursor: pointer;
+}
 td:last-child{
     text-align: right;
     padding-right: 0;
@@ -57,4 +63,8 @@ button {
     font-size: 14px;
     font-weight: 700;
     cursor: pointer;
+}
+button:hover{
+    background-color: #48a7fe;
+    border-color: #48a7fe;
 }
