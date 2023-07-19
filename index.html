@@ -20,7 +20,6 @@
                 // Variables declaration
                 const [lists, setList] = useState([]);
                 const [inputTask, setTask] = useState("");
-                console.log(lists);
                 
                 const displayTasks = (lists) =>{
                     if (localStorage.getItem("tasks") == null) return;
@@ -52,26 +51,32 @@
                 }
 
                 // Changing status of the completed tasks
-                const completeTask = (i) => {
-                    lists[i].completed = true;
-                    let el = lists.map((item) => {
-                        if(item.id === i){
-                            item.completed=true
+                const completeTask = (taskName) => {
+                    const listElm = JSON.parse(localStorage.getItem("tasks"));
+                    listElm.map((item) => {
+                        if(item.todo === taskName){
+                            item.completed = !item.completed;
                         }
                         return item
                     });
-    
-                    setList(el);                    
+                    localStorage.setItem("tasks", JSON.stringify(listElm));
+                    setList(listElm);                    
                 }
                 
                 // Delete a task
                 const deleteTask = (i) => {
-                    const newList = lists.filter((todo) => todo.id !== i);
+                    const newList = JSON.parse(localStorage.getItem("tasks"));   
+                    newList.forEach(todo => {
+                        if (todo.id === i) {
+                            newList.splice(i, 1);
+                        }
+                    });           
                     setList(newList);
+                    localStorage.setItem("tasks", JSON.stringify(newList));
                 }
 
                 return (
-                    <div onload={()=>displayTasks()}>
+                    <div>
                         <h4>My To Do List</h4>
                         <div className="form-hold">                            
                             <input
@@ -90,7 +95,7 @@
                                         {
                                             (todo.completed)?<td>Completed</td>:<td>In progress</td>
                                         }
-                                        <td><button onClick={() => completeTask(index)}>Complete</button></td>
+                                        <td><button onClick={() => completeTask(todo.todo)}>Complete</button></td>
                                         <td><button onClick = {() => deleteTask(todo.id)}>Delete</button></td>
                                     </tr>
                             ))}
