@@ -21,6 +21,7 @@
                 const [lists, setList] = useState([]);
                 const [inputTask, setTask] = useState("");
                 
+                
                 const displayTasks = (lists) =>{
                     if (localStorage.getItem("tasks") == null) return;
                     lists = JSON.parse(localStorage.getItem("tasks"));
@@ -34,19 +35,20 @@
                 
                 // Adding form data into the task list array
                 const addTask = (todo) => {
-                    const taskArray = {
-                        id: Math.random(),
-                        todo: todo,
-                        completed: false
-                    }; 
-
-                    setList([...lists, taskArray]); // Appending new tasks to the list
-                    localStorage.setItem("tasks", JSON.stringify([...JSON.parse(localStorage.getItem("tasks") || "[]"), 
-                        {   id: Math.random(),
+                        const taskArray = {
+                            id: Math.random(),
                             todo: todo,
                             completed: false
-                        }
-                    ]));
+                        }; 
+
+                        setList([...lists, taskArray]); // Appending new tasks to the list
+                        localStorage.setItem("tasks", JSON.stringify([...JSON.parse(localStorage.getItem("tasks") || "[]"), 
+                            {   id: Math.random(),
+                                todo: todo,
+                                completed: false
+                            }
+                        ]));
+                    
                     setTask("");
                 }
 
