@@ -68,3 +68,20 @@ button:hover{
     background-color: #48a7fe;
     border-color: #48a7fe;
 }
+@media screen and (max-width: 575px){
+	.table-wrap{
+		overflow-x: auto;
+	}
+	button{
+		width: 100%;
+		margin-top: 10px;
+	}
+	.form-hold{
+		display: block;
+		overflow: hidden;
+		width: 100%;
+	}
+	.form-hold input{
+		width: 100%;
+	}
+}
